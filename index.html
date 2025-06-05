@@ -1,26 +1,97 @@
 <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Encuesta CPS Ñuñoa</title>
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    body {
+      background-color: #a9d6e5; 
+      font-family: 'Merriweather', serif;
+      margin: 40px;
+    }
+    .contenedor-centro {
+      max-width: 900px;      /* Limita el ancho máximo del contenido */
+      margin-left: auto;     /* Centra el contenedor horizontalmente */
+      margin-right: auto;
+      padding: 20px;         /* Espacio interno opcional */
+      box-sizing: border-box;
+      width: 100%;           /* Hace que sea responsivo */
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-size: 1em;
+    }
+    #contenedorIframe {
+      display: none;
+      margin-top: 40px;
+      text-align: center;
+    }
+    form {
+      margin-top: 30px;
+    }
+    label, input, button {
+      font-size: 1em;
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="email"] {
+      padding: 6px;
+      width: 300px;
+      max-width: 100%;
+    }
+    button {
+      padding: 8px 18px;
+      background-color: #7a388e;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #a86ead;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor-centro">
+    <h2>Acceso a la encuesta.</h2>
+   <div class="h1-con-imagenes">
+  <img src="https://i.ibb.co/tpcGM1nM/Dise-o-sin-t-tulo-9-removebg-preview.png" alt="Flor azul izquierda">
+  <h1>
+    Al solo poder acceder con tu correo institucional nos aseguramos que solo personas pertenecientes al establecimiento puedan contestar, pero, no te preocupes, tu correo no quedara registrado a la hora de enviar tus respuestas. ¡Permitiendo tal y como prometimos que sea completamente anonimo!
+  </h1>
+  <img src="https://i.ibb.co/tpcGM1nM/Dise-o-sin-t-tulo-9-removebg-preview.png" alt="Flor azul derecha">
+</div>
+    
+    <form id="formCorreo" autocomplete="off">
+      <label for="correo">Correo institucional:</label>
+      <input type="email" id="correo" name="correo" required>
+      <button type="submit">Ingresar</button>
+      <div id="mensaje" class="error" role="alert"></div>
+    </form>
 
-<html>
+    <div id="contenedorIframe">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdjWBTloc6ukuW4wx1xNhzfhRJr9dSjYVXIM0pRVJPQYhVPng/viewform?embedded=true" width="640" height="10624" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+    </div>
+  </div>
 
-    <head>
-
-     <title>Cuestionario por el cambio</title>
-     <meta charset="utf-8">
-     <link rel="stylesheet" href="estilos.css">
-
-    </head>
-
-    <body>
-
-        <h1>Sabemos que el colegio puede hacerlo mejor. Dinos comó.</h1>
-        
-        <h2></h2>
-        <iframe src: width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAMAAGjMnK1UOE85U0hTSkZZMFQ5N1BHTUdIUDBGNzlSMS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-        
-        <h3>T.</h3>
-
-        <p></p>
-
-    </body>
-
+  <script>
+    document.getElementById('formCorreo').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const correo = document.getElementById('correo').value.trim();
+      const mensaje = document.getElementById('mensaje');
+      const contenedorIframe = document.getElementById('contenedorIframe');
+      // Expresión regular para validar correo institucional
+      const regex = /^[a-zA-Z0-9._%+-]+@cpsnunoa\.cl$/;
+      if (regex.test(correo)) {
+        this.style.display = 'none';
+        contenedorIframe.style.display = 'block';
+      } else {
+        mensaje.textContent = 'Debes ingresar un correo institucional válido (@cpsnunoa.cl).';
+      }
+    });
+  </script>
+</body>
 </html>
